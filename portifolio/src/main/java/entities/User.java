@@ -1,8 +1,18 @@
 package entities;
 
-class User {
+import java.util.Objects;
+import java.io.Serializable;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "tb_user")
+public class User implements Serializable {
+
+    private static final long serialVersionUID = -7569190958405559073L;
+
     private int id;
-    private String nome;
+    private Strin
+    g nome;
     private String email;
     private String telefone;
     private String password;
@@ -62,4 +72,21 @@ class User {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof User)) {
+            return false;
+        }
+        User user = (User) o;
+        return id == user.id && Objects.equals(nome, user.nome) && Objects.equals(email, user.email) && Objects.equals(telefone, user.telefone) && Objects.equals(password, user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, email, telefone, password);
+    }
+
 }
+
