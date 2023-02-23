@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PortifolioApplication<portifolio>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "unopar.progweb.portifolio.PortifolioApplication",
+            "projectName": "portifolio",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

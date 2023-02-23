@@ -7,11 +7,16 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable {
-
     private static final long serialVersionUID = -7569190958405559073L;
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id;
+
+    @Column(nullable = false)
     private String nome;
+    
+    @Column(unique = true)
     private String email;
     private String telefone;
     private String password;
@@ -20,8 +25,7 @@ public class User implements Serializable {
     public User(){
     }
 
-    public User(int Id, String Nome, String Email, String Telefone, String Password){
-        id=Id;
+    public User(String Nome, String Email, String Telefone, String Password){
         nome=Nome;
         email=Email;
         telefone=Telefone;
@@ -30,11 +34,11 @@ public class User implements Serializable {
     }
 
 
-    public int getId() {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
