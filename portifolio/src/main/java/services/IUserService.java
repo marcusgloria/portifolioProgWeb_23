@@ -1,18 +1,20 @@
 package services;
 
 import java.util.List;
-import java.util.Optional;
-
 import entities.User;
 
 public interface IUserService {
 
-    List < User > findAll();
+    //Ler 
+    List < User > fetchUserslList();
 
-    User save(User user);
+    //Salvar 
+    User saveUser(User user);
 
-    Optional < User > findById(Long id);
+    //Atualizar
+    User updateUser(User user, Long id);
 
-    void delete(User user);
+    //Deletar
+    void deleteUserById(Long id);
     
 }

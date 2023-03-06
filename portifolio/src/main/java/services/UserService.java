@@ -1,7 +1,7 @@
 package services;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,27 +11,54 @@ import repositories.UserRepository;
 
 @Service
 public class UserService implements IUserService{
+    
     @Autowired 
     private UserRepository userRepository;
 
+    //Ler
     @Override
-    public Optional < User > findById(Long id) {
-        return userRepository.findById(id);
+    public List < User > fetchUserslList(){
+
+        return (List<User>)
+            userRepository.findAll();
+
     }
 
+    //Salvar
     @Override
-    public User save(User user) {
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
 
+    //Atualizar
     @Override
-    public List < User > findAll() {
-        return userRepository.findAll();
+    public User updateUser(User user, Long id) {
+
+        User depDB = userRepository.findById(id).get();
+ 
+        if (Objects.nonNull(user.getNome()) && !"".equalsIgnoreCase( user.getNome())) {
+            depDB.setNome(user.getNome());
+        }
+ 
+        if (Objects.nonNull(user.getEmail()) && !"".equalsIgnoreCase(user.getEmail())) {
+            depDB.setEmail(user.getEmail());
+        }
+ 
+        if (Objects.nonNull(user.getTelefone()) && !"".equalsIgnoreCase(user.getTelefone())) {
+            depDB.setTelefone(user.getTelefone());
+        }
+
+        if (Objects.nonNull(user.getPassword()) && !"".equalsIgnoreCase(user.getPassword())) {
+            depDB.setPassword(user.getPassword());
+        }
+ 
+ 
+        return userRepository.save(depDB);
     }
 
     @Override
-    public void delete(User user) {
-        userRepository.delete(user);
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
     }
 
 }
